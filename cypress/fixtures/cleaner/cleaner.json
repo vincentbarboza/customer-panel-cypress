@@ -1,0 +1,17 @@
+{
+    "name": "Cleaner Cypress1",
+    "middleName": "van",
+    "lastName": "T.",
+    "dateOfBirth": "01/01/1980",
+    "email": "cleanercypress@cypress.com",
+    "password": "123456",
+    "address": {
+        "street": "Kinkerstraat",
+        "houseNumber": "1",
+        "zipcode": "1053 DB",
+        "city": "Amsterdam",
+        "country": "Netherlands"
+    },
+    "message": "Hi, I'm a cleaner, and I need some work!",
+    "message_review": "She's the best client I've ever had"
+} 
