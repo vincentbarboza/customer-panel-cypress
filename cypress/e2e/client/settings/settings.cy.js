@@ -1,3 +1,4 @@
+import loc from '../../../support/locators/locatorsClient'
 import client from '../../../fixtures/client/client.json'
 
 describe('settings - client', () => {
@@ -9,19 +10,19 @@ describe('settings - client', () => {
 
   it('should allow the client to edit settings', () => {
     //go to the settings page
-    cy.get('.c-vertical-nav__item').eq(7).click()
+    cy.get(loc.settings.btn_settings).eq(7).click()
 
     //edit settings
-    cy.get('.c-combobox--wide').click()
+    cy.get(loc.settings.language_options).click()
     // cy.get(':nth-child(1) > .c-dropdown').click()
-    cy.get('.c-combobox__option--selected').click()
+    cy.get(loc.settings.language_selected).click()
 
     //save
-    cy.get('[data-cy="c-btn"]').click()
+    cy.get(loc.settings.save).click()
 
     //confirmation message
     cy.contains(
-      '.c-notification__content',
+      loc.settings.notification,
       'Settings saved successfully',
     ).should('be.visible')
   })

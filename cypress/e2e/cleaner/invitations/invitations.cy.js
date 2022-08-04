@@ -1,3 +1,4 @@
+import loc from '../../../support/locators/locatorsCleaner'
 import cleaner from '../../../fixtures/cleaner/cleaner.json'
 
 describe('invitations - cleaner', () => {
@@ -9,15 +10,15 @@ describe('invitations - cleaner', () => {
 
   it('should allow the cleaner to edit invitations', () => {
     //go to invitations page
-    cy.get('.c-vertical-nav__item').eq(2).click()
+    cy.get(loc.invitations.btn_invitations).eq(2).click()
 
     //view invitation
     cy.get('[data-cy="cy-invitation-view"]').eq(0).click()
-    cy.get('.c-btn.c-invitation__choose').click()
-    cy.get('[data-cy="c-datepicker__input"]').click()
-    cy.get('.c-dropdown__overlay').eq(0).click()
-    cy.get(':nth-child(6) > .c-modal > .c-modal__close > svg').click()
-    cy.get('.c-modal__close').click()
+    cy.get(loc.invitations.accept_invitation).click()
+    cy.get(loc.invitations.btn_date).click()
+    cy.get(loc.invitations.day).eq(0).click()
+    cy.get(loc.invitations.time).click()
+    cy.get(loc.invitations.cancel).click()
   })
 
   afterEach(() => {

@@ -1,3 +1,4 @@
+import loc from '../../../support/locators/locatorsClient'
 import client from '../../../fixtures/client/client.json'
 
 describe('requests - client', () => {
@@ -7,25 +8,25 @@ describe('requests - client', () => {
     cy.menu()
   })
 
-  it('should allow a client to create and delete a request', () => {
+  it('should allow a client to create a request', () => {
     //go to the request page
-    cy.get('.c-vertical-nav__item').eq(2).click()
+    cy.get(loc.requests.btn_request).eq(2).click()
 
     //create new request
-    cy.get('.c-wishes-list__new-request').click()
+    cy.get(loc.requests.new_request).click()
 
     //enter personal data
-    cy.get('[name="postcode"]').clear().type(client.address.zipcode)
+    cy.get(loc.requests.zipcode).clear().type(client.address.zipcode)
 
-    cy.get('[name="houseNumber"]').clear().type(client.address.house_number)
+    cy.get(loc.requests.house_number).clear().type(client.address.house_number)
 
     //edit request
-    cy.get('.c-numeric-input__plus').click()
-    cy.get('.c-numeric-input__minus').click()
-    cy.get('[data-cy="starting-date"] > .c-dropdown').click()
-    cy.get('[data-cy="c-dropdown__options__wrapper"] > :nth-child(1)').click()
+    cy.get(loc.requests.hours_plus).click()
+    cy.get(loc.requests.hours_minus).click()
+    cy.get(loc.requests.date_options).click()
+    cy.get(loc.requests.option_selected).click()
 
-    cy.get('.c-radio__label').eq(1).click({ multiple: true })
+    cy.get(loc.requests.frequency).eq(1).click({ multiple: true })
 
     //disable and enable days of the week
     cy.disableDaysOfTheWeek()
@@ -43,33 +44,33 @@ describe('requests - client', () => {
     cy.lastQuestion()
 
     //save
-    cy.get('[name=submit]').click()
+    cy.get(loc.requests.save).click()
 
     //matching
     cy.contains('button', 'Select').click()
-    cy.get('[data-cy="c-btn"] > span').click()
-    cy.get('[data-cy="button-confirm"]').click()
-    console.log('existe')
+    cy.get(loc.requests.next).click()
+    cy.get(loc.requests.confirm).click()
 
     //write message
-    cy.get('.c-textarea').clear().type(client.message_request)
+    cy.get(loc.requests.text).clear().type(client.message_request)
 
     //confirm
-    cy.get('[data-cy="c-btn"]').click()
+    cy.get(loc.requests.confirm_appointment).click()
 
   })
 
-  it('test', () => {
+  it('should allow a client to delete a request', () => {
     //go to the dashboard
-    cy.get('[data-cy="to-dashboard-btn"]').click()
+    cy.get(loc.requests.dashboard).click()
 
     //go to the request page
     cy.menu()
-    cy.get('.c-vertical-nav__item').eq(2).click()
+    cy.get(loc.requests.btn_request).eq(2).click()
 
     //delete a request
-    cy.get('[data-cy="c-btn"]').eq(0).click()
-    cy.get('[name="submit"]').click()
+    cy.get(loc.requests.close_request).eq(0).click()
+    cy.get(loc.requests.save).click()
+    cy.contains(loc.requests.notification, 'Request has been closed').should('be.visible')
   })
 
   after(() => {

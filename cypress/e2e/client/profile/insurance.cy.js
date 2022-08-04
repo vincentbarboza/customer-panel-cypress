@@ -1,3 +1,4 @@
+import loc from '../../../support/locators/locatorsClient'
 import client from '../../../fixtures/client/client.json'
 
 describe('insurance on/off - client', () => {
@@ -9,10 +10,10 @@ describe('insurance on/off - client', () => {
 
   it('should allow the client to turn insurance on and off', () => {
     //turn insurance on
-    cy.get('.c-checkbox__box').click()
+    cy.get(loc.insurance.btn_insurance).click()
 
     //turn insurance off
-    cy.get('.c-checkbox__box').click()
+    cy.get(loc.insurance.btn_insurance).click()
   })
 
   afterEach(() => {

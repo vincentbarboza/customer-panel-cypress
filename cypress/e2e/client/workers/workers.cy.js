@@ -1,3 +1,4 @@
+import loc from '../../../support/locators/locatorsClient'
 import client from '../../../fixtures/client/client.json'
 
 describe('workers - client', () => {
@@ -9,10 +10,10 @@ describe('workers - client', () => {
 
   it('should allow the client to see workers', () => {
     //go to the workers page
-    cy.get('.c-vertical-nav__item').eq(4).click()
+    cy.get(loc.workers.btn_workers).eq(4).click()
 
     //see the worker
-    cy.get('.c-connections__item').eq(0).click()
+    cy.get(loc.workers.view_worker).eq(0).click()
   })
 
   afterEach(() => {

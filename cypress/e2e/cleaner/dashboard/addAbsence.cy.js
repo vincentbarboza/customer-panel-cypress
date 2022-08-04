@@ -1,5 +1,9 @@
-import loc from '../../../support/locatorsClient'
+import loc from '../../../support/locators/locatorsCleaner'
 import cleaner from '../../../fixtures/cleaner/cleaner.json'
+
+
+//{IMPORTANT} if there is an appointment scheduled for the next day, the test will fail
+
 
 describe('add absence - cleaner', () => {
   beforeEach(() => {
@@ -8,42 +12,19 @@ describe('add absence - cleaner', () => {
   })
 
   it('should allow the cleaner to add absence', () => {
-    const date = new Date()
-    const dateAddAbsence = new Date(
-      date.getFullYear(),
-      date.getMonth(),
-      date.getDate() + 1,
-    )
-
-    //go to add absence page
-    cy.get(loc.absence.absence_page).click()
-
-    //add absence
-    cy.get('[data-cy="c-datepicker__input"]').eq(0).click()
-    cy.get(`.DayPicker-Week > [aria-label="${dateAddAbsence.toDateString()}"]`)
-      .eq(1)
-      .click()
-    cy.get(`.DayPicker-Week > [aria-label="${dateAddAbsence.toDateString()}"]`)
-      .eq(1)
-      .click()
-
-    //add time
-    cy.get('.c-input.c-input--with-icon').eq(0).click()
-    cy.get('.c-autocomplete__option').first().click()
-    cy.get('.c-input.c-input--with-icon').eq(1).click()
-    cy.get('.c-autocomplete__option').last().click()
+    cy.addAbsence()
 
     //choosing reason
     for (let i = 0; i < 3; i++) {
-      cy.get('.c-radio__label').eq(i).click()
+      cy.get(loc.add_absence.reason).eq(i).click()
     }
 
     //save
-    cy.get('[data-cy="c-btn"] > span').click()
+    cy.get(loc.add_absence.save).click()
 
     //notification
     cy.contains(
-      '.c-notification__content',
+      loc.add_absence.notification,
       'Absence added successfully',
     ).should('be.visible')
   })

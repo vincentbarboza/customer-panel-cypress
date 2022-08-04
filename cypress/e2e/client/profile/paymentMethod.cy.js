@@ -1,3 +1,4 @@
+import loc from '../../../support/locators/locatorsClient'
 import client from '../../../fixtures/client/client.json'
 
 describe('payment mothod - client', () => {
@@ -9,15 +10,15 @@ describe('payment mothod - client', () => {
 
   it('should allow the client to edit the payment method', () => {
     //go to payment method edit page
-    cy.get('[data-cy="c-billing-editable__button"] > svg').click()
+    cy.get(loc.payment_method.btn_payment_method).click()
 
     //edit payment method
-    cy.get('.c-radio__label').eq(0).click()
-    cy.get('.c-input').clear().type('NL91ABNA0417164300')
-    cy.get('.c-radio__label').eq(1).click()
+    cy.get(loc.payment_method.aumotamitc_payment).eq(0).click()
+    cy.get(loc.payment_method.bank_account).clear().type(client.bank_account)
+    cy.get(loc.payment_method.ideal).eq(1).click()
 
     //save
-    cy.get('[data-cy="c-btn"]').click()
+    cy.get(loc.payment_method.save).click()
   })
 
   afterEach(() => {

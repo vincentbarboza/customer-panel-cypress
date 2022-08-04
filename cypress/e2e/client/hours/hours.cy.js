@@ -1,3 +1,4 @@
+import loc from '../../../support/locators/locatorsClient'
 import client from '../../../fixtures/client/client.json'
 
 describe('hours - client', () => {
@@ -9,19 +10,19 @@ describe('hours - client', () => {
 
   it('should allow the client to edit the hours', () => {
     //go to the hours edit page
-    cy.get('.c-vertical-nav__item').eq(3).click()
+    cy.get(loc.hours.btn_hours).eq(3).click()
 
     //edit the hours
-    cy.get('button.c-btn-text').click()
-    cy.get('.c-form__input > .c-dropdown').click()
-    cy.get('.c-combobox__option--selected').click()
+    cy.get(loc.hours.edit_hours).click()
+    cy.get(loc.hours.hours_options).click()
+    cy.get(loc.hours.opotion_selected).click()
 
     //save
-    cy.get('[data-cy="c-btn"]').click()
+    cy.get(loc.hours.save).click()
 
     //confirmation
     cy.contains(
-      '.c-notification__content',
+      loc.hours.notification,
       'Hours settings saved successfully',
     ).should('be.visible')
   })

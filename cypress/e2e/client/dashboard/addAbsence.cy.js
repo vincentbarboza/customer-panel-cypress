@@ -1,5 +1,7 @@
-import { eq } from 'lodash'
+import loc from '../../../support/locators/locatorsClient'
 import client from '../../../fixtures/client/client.json'
+
+//{IMPORTANT} if there is an appointment scheduled for the next day, the test will fail
 
 describe('add absence - client', () => {
   beforeEach(() => {
@@ -8,37 +10,14 @@ describe('add absence - client', () => {
   })
 
   it('should allow the client to add absence', () => {
-    const date = new Date()
-    const dateAddAbsence = new Date(
-      date.getFullYear(),
-      date.getMonth(),
-      date.getDate() + 1,
-    )
-
-    //go to add absence page
-    cy.get('[data-cy="add-absence-btn"]').click()
-
-    //add absence
-    cy.get('[data-cy="c-datepicker__input"]').eq(0).click()
-    cy.get(`.DayPicker-Week > [aria-label="${dateAddAbsence.toDateString()}"]`)
-      .eq(1)
-      .click()
-    cy.get(`.DayPicker-Week > [aria-label="${dateAddAbsence.toDateString()}"]`)
-      .eq(1)
-      .click()
-
-    //add time
-    cy.get('.c-input.c-input--with-icon').eq(0).click()
-    cy.get('.c-autocomplete__option').first().click()
-    cy.get('.c-input.c-input--with-icon').eq(1).click()
-    cy.get('.c-autocomplete__option').last().click()
+    cy.addAbsence()
 
     //save
-    cy.get('[data-cy="c-btn"] > span').click()
+    cy.get(loc.absence.save).click()
 
     //notification
     cy.contains(
-      '.c-notification__content',
+      loc.absence.notification,
       'Absence added successfully',
     ).should('be.visible')
   })

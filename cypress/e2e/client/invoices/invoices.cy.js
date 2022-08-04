@@ -1,3 +1,4 @@
+import loc from '../../../support/locators/locatorsClient'
 import client from '../../../fixtures/client/client.json'
 
 describe('invoices - client', () => {
@@ -9,18 +10,18 @@ describe('invoices - client', () => {
 
   it('should allow the client to edit the invoices', () => {
     //go to invoices edit page
-    cy.get('.c-vertical-nav__item').eq(5).click()
+    cy.get(loc.invoices.btn_invoices).eq(5).click()
 
     //edit invoices
-    cy.get('.c-form__input > .c-dropdown').click()
-    cy.get('.c-combobox__option--selected').click()
+    cy.get(loc.invoices.invoices_options).click()
+    cy.get(loc.invoices.option_selected).click()
 
     //save
-    cy.get('[data-cy="c-btn"]').click()
+    cy.get(loc.invoices.save).click()
 
     //confirmation
     cy.contains(
-      '.c-notification__content',
+      loc.invoices.notification,
       'Invoice settings saved successfully',
     ).should('be.visible')
   })
