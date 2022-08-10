@@ -11,6 +11,9 @@ import '../cleaner/appointments/appointments.cy'
 import '../cleaner/dashboard/addAbsence.cy'
 import '../cleaner/dashboard/availability.cy'
 
+//intake
+import '../cleaner/intake/intake.cy'
+
 //invitations
 import '../cleaner/invitations/invitations.cy'
 
@@ -44,6 +47,9 @@ import '../client/appointments/appointments.cy'
 
 //hours
 import '../client/hours/hours.cy'
+
+//intake
+import '../client/intake/intake.cy'
 
 //invoices
 import '../client/invoices/invoices.cy'

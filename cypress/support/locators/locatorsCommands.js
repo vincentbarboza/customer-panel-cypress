@@ -132,6 +132,14 @@ const locators = {
         time_option: '.c-autocomplete__option',
     },
 
+    maximum_travel: {
+        slider: '.c-slider__handle',
+    },
+
+    maximum_rate: {
+        btn: '.c-numeric-input__button',
+    },
+
 }
 
 export default locators

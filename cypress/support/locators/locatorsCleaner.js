@@ -17,6 +17,23 @@ const locators = {
 
     },
 
+    intake: {
+        intake_page: 'https://mijn-homeworks.ict-works.info/intake/worker/step1',
+        zipcode: '[name="postcode"]',
+        house_number: '[name="houseNumber"]',
+        ducth_language: '.c-checkbox__label',
+        last_question: '.c-checkbox__box',
+        save: '[data-cy="c-btn"]',
+        message: '[name="note"]',
+        first_name: '[name="firstName"]',
+        last_name: '[name="lastName"]',
+        email: '[name="email"]',
+        phone: '[name="phone"]',
+        password: '[name="password"]',
+        password_confirmation: '[name="passwordConfirmation"]',
+
+    },
+
     invitations: {
         btn_invitations: '.c-vertical-nav__item',
         view_invitation: '[data-cy="cy-invitation-view"]',

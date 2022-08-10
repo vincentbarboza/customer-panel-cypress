@@ -283,3 +283,26 @@ Cypress.Commands.add('addAbsence', () => {
   cy.get(loc.add_absence.time_option).last().click()
 
 })
+
+Cypress.Commands.add('maximumTravelAndHours', () => {
+  for (let i = 0; i <= 1; i++) {
+    cy.get(loc.maximum_travel.slider)
+      .eq(i)
+      .trigger('mousedown', { which: 1, pageX: 200, pageY: 100 })
+      .trigger('mousemove', { which: 1, pageX: 200, pageY: 600 })
+      .trigger('mouseup')
+    cy.get('.c-slider__handle')
+      .eq(i)
+      .trigger('mousedown', { which: 1, pageX: 900, pageY: 100 })
+      .trigger('mousemove', { which: 1, pageX: 900, pageY: 600 })
+      .trigger('mouseup')
+  }
+})
+
+Cypress.Commands.add('maximumRate', () => {
+  for (let i = 1; i >= 0; i--) {
+    cy.get(loc.maximum_rate.btn).eq(i).trigger('mousedown')
+    cy.wait(2000)
+    cy.get(loc.maximum_rate.btn).eq(i).trigger('mouseup')
+  }
+})
