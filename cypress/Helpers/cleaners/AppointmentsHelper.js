@@ -7,7 +7,7 @@ export default class AppointmentsHelper {
         before(() => {
             cy.loginCleaner();
 
-            // Get the PHPSESSID cookie
+            // Get the cookie PHPSESSID 
             cy.getCookie("PHPSESSID").then((cookie) => {
                 setCookie = cookie;
             });
