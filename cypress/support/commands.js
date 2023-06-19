@@ -1,25 +1,69 @@
 import loc from '../support/locators/locatorsCommands'
-import 'cypress-file-upload'
+import cleanerData from '../fixtures/cleaner/cleanerData/cleanerData.js'
 
-Cypress.Commands.add('login', (email, password) => {
-  //log in
-  cy.visit(loc.login.visit)
-  cy.get(loc.login.btn_login).click()
-  cy.get(loc.login.email).type(email)
-  cy.get(loc.login.password).type(password)
-  cy.get(loc.login.submit).click()
+const selectors = {
+  // login selectors
+  goToLoginPageContainer: '[id="ember5"]',
+  goToLoginPageButton: '[class="m-method c-btn ember-view"]',
+  loginForm: '[id="ember6"]',
+  usernameContainer: '[id="ember7"]',
+  usernameInput: '[class="c-input"]',
+  passwordContainer: '[id="ember10"]',
+  passwordInput: '[class="c-input"]',
+  submitButton: '[id="ember12"]',
+
+  // menu
+  dropDownMenuContainer: '[class="c-horizontal-nav__item c-header__hamburger"]',
+
+  // logout
+  settingsAndLogoutContainer: '[class="c-header__section"]',
+}
+
+// LOGIN
+Cypress.Commands.add('loginCleaner', () => {
+  cy.intercept('GET', '/http/sso/homeworks').as('loginHomeWorks')
+  cy.intercept('POST', 'http/tickets/query/customer-panel:offer/get-offers-by-worker-id').as('offers')
+
+  // visit the first page
+  cy.visit('/')
+
+  // go to the login page
+  cy.get(selectors.goToLoginPageContainer).within(() => {
+    cy.get(selectors.goToLoginPageButton).click()
+  })
+
+  cy.wait('@loginHomeWorks', { timeout: 60000 })
+
+  // type the username
+  cy.get(selectors.loginForm).within(() => {
+    cy.get(selectors.usernameContainer).within(() => {
+      cy.get(selectors.usernameInput).type(cleanerData.email)
+    })
+
+    // type de password
+    cy.get(selectors.passwordContainer).within(() => {
+      cy.get(selectors.passwordInput).type(cleanerData.password)
+    })
+  })
+
+  // submit
+  cy.get(selectors.submitButton).click()
+
+  // wait for my panel page to load
+  cy.wait('@offers', { timeout: 60000 })
 })
 
-Cypress.Commands.add('menu', () => {
-  //go to the menu
-  cy.get(loc.menu.btn_menu).click()
-})
 
+// LOGOUT 
 Cypress.Commands.add('logout', () => {
-  //log out 
-  cy.wait(5000)
   cy.menu()
-  cy.get(loc.logout.btn_logout).eq(0).click()
+  cy.get(selectors.settingsAndLogoutContainer).find('button').contains('Logout').click()
+})
+
+
+// MENU
+Cypress.Commands.add('menu', () => {
+  cy.get(selectors.dropDownMenuContainer).find('svg').click()
 })
 
 

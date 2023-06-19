@@ -1,12 +1,15 @@
-const { defineConfig } = require("cypress");
+const { defineConfig } = require('cypress')
+const { cloudPlugin } = require("cypress-cloud/plugin");
 
 module.exports = defineConfig({
+  chromeWebSecurity: false,
+  // responseTimeout: 60000,
   e2e: {
-    defaultCommandTimeout: 60000,
-
+    baseUrl: 'https://mijn-homeworks.ict-works.info/',
+    experimentalSessionAndOrigin: true,
+    experimentalModifyObstructiveThirdPartyCode: true,
     setupNodeEvents(on, config) {
-      // implement node event listeners here
-
+      return cloudPlugin(on, config);
     },
   },
-});
+})
